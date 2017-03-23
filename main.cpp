@@ -5,6 +5,8 @@
 #include <QFuture>
 #include <iostream>
 
+using namespace std;
+
 bool isPrime(int num)
 {
     int limit = num / 2 + 1;
@@ -37,8 +39,10 @@ int main(int argc, char *argv[])
     int limit = 0;
     long long result = 2;
 
-    std::cout << "Number: ";
-    std::cin >> limit;
+    cout << "This program calculates the sum of the first X primes..." <<  endl << endl;
+
+    cout << "Limit: ";
+    cin >> limit;
 
     QVector <QFuture < int >> futureVec;
 
@@ -52,7 +56,7 @@ int main(int argc, char *argv[])
         result += futInst.result();
     }
 
-    std::cout << std::endl << "Result: " << result;
+    cout << endl << "Result: " << result;
 
     return a.exec();
 }
