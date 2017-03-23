@@ -5,11 +5,6 @@
 #include <QFuture>
 #include <iostream>
 
-/*
- * Checks if the number is prime
- * Works only on odd numbers and the number must be bigger than 2
- *
-*/
 bool isPrime(int num)
 {
     int limit = num / 2 + 1;
