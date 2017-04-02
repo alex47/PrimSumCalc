@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 
     timer.start();
 
-    for (int i = 6; i <= limit; i+= 6)
+    for (int i = 6; i < limit; i+= 6)
     {
         futureVec.append(QtConcurrent::run(numToAdd, i - 1));
         futureVec.append(QtConcurrent::run(numToAdd, i + 1));
