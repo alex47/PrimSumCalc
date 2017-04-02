@@ -11,15 +11,15 @@ bool isPrime(int num)
 {
     int limit = num / 2 + 1;
 
-        for (int i = 3; i < limit; i += 2)
+    for (int i = 3; i < limit; i += 2)
+    {
+        if (num % i == 0)
         {
-            if (num % i == 0)
-            {
-                return false;
-            }
+            return false;
         }
-
-        return true;
+        }
+    
+    return true;
 }
 
 int numToAdd(int num)
