@@ -10,7 +10,7 @@ using namespace std;
 
 bool isPrime(int num)
 {
-    int limit = num / 2 + 1;
+    int limit = sqrt(num) + 1;
 
     for (int i = 3; i < limit; i += 2)
     {
