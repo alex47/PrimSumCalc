@@ -1,12 +1,10 @@
 #include <QCoreApplication>
-#include <QThread>
 #include <QtConcurrent/QtConcurrent>
 #include <QVector>
 #include <QFuture>
-#include <QTime>
 #include <iostream>
-
-using namespace std;
+#include <QTime>
+#include <QTextStream>
 
 bool isPrime(int num)
 {
@@ -19,18 +17,13 @@ bool isPrime(int num)
             return false;
         }
     }
-    
+
     return true;
 }
 
 int numToAdd(int num)
 {
-    if (isPrime(num))
-    {
-        return num;
-    }
-
-    return 0;
+    return isPrime(num) ? num : 0;
 }
 
 int main(int argc, char *argv[])
@@ -41,19 +34,22 @@ int main(int argc, char *argv[])
     long long result = 2;
     QTime timer;
     float timeSec = 0;
-
-    cout << "This program calculates the sum of the first X primes..." <<  endl << endl;
-
-    cout << "Limit: ";
-    cin >> limit;
-
     QVector <QFuture < int >> futureVec;
+    QTextStream s(stdin);
+
+
+    qDebug() << "This program calculates the sum of the first X primes..." <<  endl << endl;
+    qDebug() << "Limit: ";
+    limit = s.readLine().toInt();
+
+
     timer.start();
 
     for (int i = 3; i < limit; i+= 2)
     {
         futureVec.append(QtConcurrent::run(numToAdd, i));
     }
+
 
     foreach (QFuture <int> futInst, futureVec)
     {
@@ -62,8 +58,10 @@ int main(int argc, char *argv[])
 
     timeSec = (float)timer.elapsed() / 1000;
 
-    cout << "Result: " << result << endl;
-    cout << "Calculation time: " << timeSec << " seconds" << endl;
+
+    qDebug() << "Result: " << result << endl;
+    qDebug() << "Calculation time: " << timeSec << " seconds" << endl;
+
 
     return a.exec();
 }
