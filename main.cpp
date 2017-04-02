@@ -3,6 +3,7 @@
 #include <QtConcurrent/QtConcurrent>
 #include <QVector>
 #include <QFuture>
+#include <QTime>
 #include <iostream>
 
 using namespace std;
@@ -38,6 +39,8 @@ int main(int argc, char *argv[])
 
     int limit = 0;
     long long result = 2;
+    QTime timer;
+    float timeSec = 0;
 
     cout << "This program calculates the sum of the first X primes..." <<  endl << endl;
 
@@ -45,6 +48,7 @@ int main(int argc, char *argv[])
     cin >> limit;
 
     QVector <QFuture < int >> futureVec;
+    timer.start();
 
     for (int i = 3; i < limit; i+= 2)
     {
@@ -56,7 +60,10 @@ int main(int argc, char *argv[])
         result += futInst.result();
     }
 
-    cout << endl << "Result: " << result;
+    timeSec = (float)timer.elapsed() / 1000;
+
+    cout << "Result: " << result << endl;
+    cout << "Calculation time: " << timeSec << " seconds" << endl;
 
     return a.exec();
 }
