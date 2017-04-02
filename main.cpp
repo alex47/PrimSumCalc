@@ -10,7 +10,7 @@ bool isPrime(int num)
 {
     int limit = sqrt(num) + 1;
 
-    for (int i = 3; i < limit; i += 2)
+    for (int i = 3; i <= limit; i += 2)
     {
         if (num % i == 0)
         {
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     int limit = 0;
-    long long result = 2;
+    long long result = 5;
     QTime timer;
     float timeSec = 0;
     QVector <QFuture < int >> futureVec;
@@ -45,9 +45,10 @@ int main(int argc, char *argv[])
 
     timer.start();
 
-    for (int i = 3; i < limit; i+= 2)
+    for (int i = 6; i <= limit; i+= 6)
     {
-        futureVec.append(QtConcurrent::run(numToAdd, i));
+        futureVec.append(QtConcurrent::run(numToAdd, i - 1));
+        futureVec.append(QtConcurrent::run(numToAdd, i + 1));
     }
 
 
